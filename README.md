@@ -29,8 +29,22 @@ run:
 
 ```bash
 sudo apt-get install  -y wget build-essential xutils-dev bison zlib1g-dev flex \
-      libglu1-mesa-dev git g++ libssl-dev libxml2-dev libboost-all-dev git g++ \
-      libxml2-dev vim python-setuptools python-dev build-essential python-pip
+      libglu1-mesa-dev git g++ libssl-dev libxml2-dev libboost-all-dev \
+      vim python-setuptools python-dev python-pip
+
+pip3 install pyyaml plotly psutil
+wget http://developer.download.nvidia.com/compute/cuda/11.0.1/local_installers/cuda_11.0.1_450.36.06_linux.run
+sh cuda_11.0.1_450.36.06_linux.run --silent --toolkit
+rm cuda_11.0.1_450.36.06_linux.run
+```
+
+Fedora:
+
+```bash
+sudo dnf group install "C Development Tools and Libraries" "Development Tools"
+sudo dnf install wget xorg-x11-util-macros.noarch bison zlib-devel flex \
+      mesa-libGL-devel git g++ openssl-devel libxml2-devel boost-devel git \
+      vim python-setuptools python-dev python-pip
 
 pip3 install pyyaml plotly psutil
 wget http://developer.download.nvidia.com/compute/cuda/11.0.1/local_installers/cuda_11.0.1_450.36.06_linux.run
