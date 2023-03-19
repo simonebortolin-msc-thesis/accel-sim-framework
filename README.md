@@ -41,8 +41,7 @@ rm cuda_11.0.1_450.36.06_linux.run
 if the GCC version is not supported, e.g. 11 is installed and NVCC wants 9 (see https://gist.github.com/ax3l/9489132):
 
 ```
-sudo apt install gcc-9
-sudo apt install g++-9
+sudo apt install -y gcc-9 g++-9
 
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 20
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 30
