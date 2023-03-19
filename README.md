@@ -38,18 +38,16 @@ sh cuda_11.0.1_450.36.06_linux.run --silent --toolkit
 rm cuda_11.0.1_450.36.06_linux.run
 ```
 
-Fedora:
+if the GCC version is not supported, e.g. 11 is installed and NVCC wants 9 (see https://gist.github.com/ax3l/9489132):
 
-```bash
-sudo dnf group install "C Development Tools and Libraries" "Development Tools"
-sudo dnf install wget xorg-x11-util-macros.noarch bison zlib-devel flex \
-      mesa-libGL-devel git g++ openssl-devel libxml2-devel boost-devel git \
-      vim python-setuptools python-dev python-pip
+```
+sudo apt install gcc-9
+sudo apt install g++-9
 
-pip3 install pyyaml plotly psutil
-wget http://developer.download.nvidia.com/compute/cuda/11.0.1/local_installers/cuda_11.0.1_450.36.06_linux.run
-sh cuda_11.0.1_450.36.06_linux.run --silent --toolkit
-rm cuda_11.0.1_450.36.06_linux.run
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 20
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 30
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 20
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 30
 ```
 
 Note, that all the python scripts have more detailed options explanations when run with "--help"
