@@ -33,20 +33,9 @@ sudo apt-get install -y xutils-dev bison zlib1g-dev flex \
       libxml2-dev vim python-setuptools python-is-python3 python3-pip
 
 pip install plotly psutil
-wget http://developer.download.nvidia.com/compute/cuda/11.0.1/local_installers/cuda_11.0.1_450.36.06_linux.run
-sh cuda_11.0.1_450.36.06_linux.run --silent --toolkit
-rm cuda_11.0.1_450.36.06_linux.run
-```
-
-if the GCC version is not supported, e.g. 11 is installed and NVCC wants 9 (see https://gist.github.com/ax3l/9489132):
-
-```
-sudo apt install -y gcc-9 g++-9
-
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 20
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 30
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 20
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 30
+wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda_12.1.0_530.30.02_linux.run
+sudo sh cuda_12.1.0_530.30.02_linux.run
+rm cuda_12.1.0_530.30.02_linux.run
 ```
 
 Note, that all the python scripts have more detailed options explanations when run with "--help"
