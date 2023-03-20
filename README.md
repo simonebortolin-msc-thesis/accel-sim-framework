@@ -78,7 +78,7 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
     export CUDA_INSTALL_PATH=<your_cuda>  
     export PATH=$CUDA_INSTALL_PATH/bin:$PATH  
     ./util/tracer_nvbit/install_nvbit.sh  
-    make -C ./util/tracer_nvbit/  
+    make CC=gcc-9 CPP=g++-9 CXX=g++-9 LD=g++-9 -C ./util/tracer_nvbit/  
     ```  
     ---
     *A simple example*  
