@@ -32,7 +32,7 @@ sudo apt-get install -y xutils-dev bison zlib1g-dev flex \
       libglu1-mesa-dev git libssl-dev libxml2-dev libboost-all-dev \
       libxml2-dev vim python-setuptools python-is-python3 python3-pip
 
-pip install plotly psutil
+pip install plotly
 wget https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda_12.1.0_530.30.02_linux.run
 sudo sh cuda_12.1.0_530.30.02_linux.run
 rm cuda_12.1.0_530.30.02_linux.run
