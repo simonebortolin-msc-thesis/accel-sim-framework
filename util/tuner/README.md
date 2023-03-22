@@ -33,6 +33,10 @@ Then, compile microbenchmarks and run:
   #run the ubench and save output in stats.txt
   ./GPU_Microbenchmark/run_all.sh | tee stats.txt
   ```  
+
+  From Cuda 11.6, all CUDA samples are now only available on the GitHub repository, also the file `helper_cuda.h`. Necessary to have microbenchmark compiled. It is therefore necessary to set the correct path in `./GPU_Microbenchmark/common/common.mk` in the `INCLUDE` variable (line 19).
+
+
 2. **Run the tuner**:
 The tuner.py script will parse the microbenchmarks output and generate a folder of the HW device name (e.g. "TITAN_V"). The folder will contain the config files for GPGPU-Sim performance model and Accel-Sim trace-driven front-end (gpgpusim.config and trace.config files)
 
