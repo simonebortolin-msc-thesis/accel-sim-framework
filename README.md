@@ -219,6 +219,8 @@ For a true validation, you should attempt correlating the fully-scaled set of ap
   # Run the tuner with the stats.txt from the previous step
   ./util/tuner/tuner.py -s stats.txt
   ```  
+
+  From Cuda 11.6, all CUDA samples are now only available on the GitHub repository, also the file `helper_cuda.h`. Necessary to have microbenchmark compiled. It is therefore necessary to set the correct path in `./util/tuner/GPU_Microbenchmark/common/common.mk` in the `INCLUDE` variable (line 19).
   
   The tuner.py script will parse the microbenchmarks output and generate a folder with the same device name (e.g. "RTX_3060"). The folder will contain the config files for GPGPU-Sim performance model and Accel-Sim trace-driven front-end that matche and model the underline hardware as much as possible. For more detilas about the Accel-Sim tuner and the microbemcakring suite, read [this](https://github.com/accel-sim/accel-sim-framework/tree/dev/util/tuner#readme).
 
