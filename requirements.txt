@@ -1,5 +1,3 @@
-pyyaml
 pandas
 plotly
 kaleido
-psutil
