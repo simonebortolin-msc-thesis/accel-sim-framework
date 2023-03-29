@@ -79,7 +79,6 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
     # Make sure CUDA_INSTALL_PATH is set, and PATH includes nvcc  
       
     # Get the applications, their data files and build them:  
-    git clone https://github.com/accel-sim/gpu-app-collection  
     source ./gpu-app-collection/src/setup_environment  
     make -j -C ./gpu-app-collection/src rodinia_2.0-ft  
     make -C ./gpu-app-collection/src data  
