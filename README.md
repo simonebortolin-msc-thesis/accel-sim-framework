@@ -76,6 +76,8 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
     that get run in our travis regressions:  
       
     ```bash  
+    git submodule init
+    git submodule update
     # Make sure CUDA_INSTALL_PATH is set, and PATH includes nvcc  
       
     # Get the applications, their data files and build them:  
