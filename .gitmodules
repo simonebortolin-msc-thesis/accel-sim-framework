@@ -3,4 +3,4 @@
 	url = git@github.com:accel-sim/gpu-app-collection.git
 [submodule "gpu-simulator/gpgpu-sim"]
 	path = gpu-simulator/gpgpu-sim
-	url = https://github.com/accel-sim/gpgpu-sim_distribution
+	url = git@github.com/accel-sim/gpgpu-sim_distribution
