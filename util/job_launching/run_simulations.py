@@ -42,6 +42,7 @@ import glob
 import datetime
 import yaml
 import common
+import pathlib
 
 this_directory = os.path.dirname(os.path.realpath(__file__)) + "/"
 # This function will pull the SO name out of the shared object,
@@ -319,7 +320,7 @@ class ConfigurationSpec:
             config_text += "\n" + "-hw_perf_bench_name " + bench_name + "\n"
 
         if options.trace_dir != "":
-            cfgsubdir = re.sub(r".*(configs.*)gpgpusim.config", r"\1", config_text_file)
+            cfgsubdir = pathlib.Path(config_text_file).parent.resolve()
             config_text += "\n" + "# Accel-Sim Parameters" + "\n"
             accelsim_cfg = os.path.expandvars(os.path.join("$ACCELSIM_ROOT", cfgsubdir, "trace.config"))
             config_text += open(accelsim_cfg).read()
