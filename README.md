@@ -89,7 +89,7 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
     ./util/tracer_nvbit/run_hw_trace.py -B rodinia_2.0-ft -D <gpu-device-num-to-run-on>  
     ```  
 
-    **N.B. If you have already run the command `source ./gpu-simulator/setup_environment.sh` restart the terminal to reset the environment variables**
+    **N.B.** If you have already run the command `source ./gpu-simulator/setup_environment.sh` restart the terminal to reset the environment variables
       
     That's it. The traces for the short-running rodinia tests will be generated in:  
     ```bash  
@@ -107,7 +107,7 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
 
 2. **Accel-Sim SASS Frontend and Simulation Engine**: A simulator frontend that consumes SASS traces and feeds them into a performance model. The intial release of Accel-Sim coincides with the release of [GPGPU-Sim 4.0](https://github.com/accel-sim/accel-sim-framework/blob/dev/gpu-simulator/gpgpu-sim4.md), which acts as the detailed performance model. 
 
- **N.B. If you have already run the command `source ./gpu-app-collection/src/setup_environment` restart the terminal to reset the environment variables**
+ **N.B.** If you have already run the command `source ./gpu-app-collection/src/setup_environment` restart the terminal to reset the environment variables
 
 To build the Accel-Sim simulator that uses the traces, do the following:
     ```bash
