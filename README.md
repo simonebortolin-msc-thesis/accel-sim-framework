@@ -20,23 +20,23 @@ in 2021 IEEE/ACM International Symposium on Microarchitecture (MICRO)
 ```
 
 
-## Dependencies
+## Dependencies and Installation
 
 This package is meant to be run on a modern linux distro.
 A docker image that works with this repo can be found [here](https://hub.docker.com/repository/docker/accelsim/ubuntu-18.04_cuda-11).
-There is nothing special here, just Ubuntu 18.04 with the following commands
-run:
+There is nothing special here, just Ubuntu 22.04 with the following commands run:
 
 ```bash
 sudo apt install xutils-dev bison zlib1g-dev flex mesa-utils libglu1-mesa-dev \
                  mesa-common-dev libssl-dev libxml2-dev libboost-dev \ 
                  python-setuptools python-is-python3 python3-pip 
 
-
 pip install plotly pandas kaleido
-wget http://developer.download.nvidia.com/compute/cuda/11.0.1/local_installers/cuda_11.0.1_450.36.06_linux.run
-sh cuda_11.0.1_450.36.06_linux.run --silent --toolkit
-rm cuda_11.0.1_450.36.06_linux.run
+pip install plotly pandas kaleido
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb
+sudo dpkg -i cuda-keyring_1.0-1_all.deb
+sudo apt update
+sudo apt install nvidia-driver-470 cuda-toolkit-11-8
 ```
 
 Note, that all the python scripts have more detailed options explanations when run with "--help"
@@ -163,7 +163,8 @@ Note that this step assumes you have already built the apps using the instructio
 ./util/hw_stats/run_hw.py -B rodinia_2.0-ft
 ```
 
-Note: Different cards support different profilers. By default - this script will use nvprof. However, you can use nsight-cli instead using:
+Note: Different cards support different profilers. By default - this script will use nvprof. The nvprof cannot be used if the capabilty is greather or equals than 7.5.
+However, you can use nsight-cli instead using:
 ```bash
 ./util/hw_stats/run_hw.py -B rodinia_2.0-ft --nsight_profiler --disable_nvprof
 ```
@@ -213,23 +214,23 @@ For a true validation, you should attempt correlating the fully-scaled set of ap
 
 4. **Accel-Sim Tuner**: An automated tuner that automates configuration file generation from a detailed microbenchmark suite. You need to provide a C header file `hw_def` that contains minimal information about the hardware model. This file is used to configure and tune the microbenchmarks for the unduerline hardware. See an example of Ampere RTX 3060 card [here](https://github.com/accel-sim/accel-sim-framework/blob/dev/util/tuner/GPU_Microbenchmark/hw_def/ampere_RTX3070_hw_def.h). Then, compile and run the microbenchmarks and the tuner:
 
-  ```bash
-  # Make sure PATH includes nvcc  
-  # If your hardware has new compute capability, ensure to add it in the /GPU_Microbenchmark/common/common.mk
-  # Compile microbenchmarks
-  make -C ./util/tuner/GPU_Microbenchmark/
-  # Set the device id that you want to tune to 
-  # If you do not know the device id, run ./tuner/GPU_Microbenchmark/bin/list_devices
-  export CUDA_VISIBLE_DEVICES=0  
-  # Run the ubench and save output in stats.txt
-  ./util/tuner/GPU_Microbenchmark/run_all.sh | tee stats.txt
-  # Run the tuner with the stats.txt from the previous step
-  ./util/tuner/tuner.py -s stats.txt
-  ```  
+    ```bash
+    # Make sure PATH includes nvcc  
+    # If your hardware has new compute capability, ensure to add it in the /GPU_Microbenchmark/common/common.mk
+    # Compile microbenchmarks
+    make -C ./util/tuner/GPU_Microbenchmark/
+    # Set the device id that you want to tune to 
+    # If you do not know the device id, run ./tuner/GPU_Microbenchmark/bin/list_devices
+    export CUDA_VISIBLE_DEVICES=0  
+    # Run the ubench and save output in stats.txt
+    ./util/tuner/GPU_Microbenchmark/run_all.sh | tee stats.txt
+    # Run the tuner with the stats.txt from the previous step
+    ./util/tuner/tuner.py -s stats.txt
+    ```  
 
-  From Cuda 11.6, all CUDA samples are now only available on the GitHub repository, also the file `helper_cuda.h`. Necessary to have microbenchmark compiled. It is therefore necessary to set the correct path in `./util/tuner/GPU_Microbenchmark/common/common.mk` in the `INCLUDE` variable (line 19).
-  
-  The tuner.py script will parse the microbenchmarks output and generate a folder with the same device name (e.g. "RTX_3060"). The folder will contain the config files for GPGPU-Sim performance model and Accel-Sim trace-driven front-end that matche and model the underline hardware as much as possible. For more detilas about the Accel-Sim tuner and the microbemcakring suite, read [this](https://github.com/accel-sim/accel-sim-framework/tree/dev/util/tuner#readme).
+    From Cuda 11.6, all CUDA samples are now only available on the GitHub repository, also the file `helper_cuda.h`. Necessary to have microbenchmark compiled. It is therefore necessary to set the correct path in `./util/tuner/GPU_Microbenchmark/common/common.mk` in the `INCLUDE` variable (line 19).
+    
+    The tuner.py script will parse the microbenchmarks output and generate a folder with the same device name (e.g. "RTX_3060"). The folder will contain the config files for GPGPU-Sim performance model and Accel-Sim trace-driven front-end that matche and model the underline hardware as much as possible. For more detilas about the Accel-Sim tuner and the microbemcakring suite, read [this](https://github.com/accel-sim/accel-sim-framework/tree/dev/util/tuner#readme).
 
 
 ### How do I quickly just run what Travis runs?
