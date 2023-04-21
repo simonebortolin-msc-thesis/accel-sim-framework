@@ -28,11 +28,12 @@ There is nothing special here, just Ubuntu 18.04 with the following commands
 run:
 
 ```bash
-sudo apt-get install  -y wget build-essential xutils-dev bison zlib1g-dev flex \
-      libglu1-mesa-dev git g++ libssl-dev libxml2-dev libboost-all-dev git g++ \
-      libxml2-dev vim python-setuptools python-dev build-essential python-pip
+sudo apt install xutils-dev bison zlib1g-dev flex mesa-utils libglu1-mesa-dev \
+                 mesa-common-dev libssl-dev libxml2-dev libboost-dev \ 
+                 python-setuptools python-is-python3 python3-pip 
 
-pip3 install pyyaml plotly psutil
+
+pip install plotly pandas kaleido
 wget http://developer.download.nvidia.com/compute/cuda/11.0.1/local_installers/cuda_11.0.1_450.36.06_linux.run
 sh cuda_11.0.1_450.36.06_linux.run --silent --toolkit
 rm cuda_11.0.1_450.36.06_linux.run
@@ -111,7 +112,6 @@ AccelWattch microbenchmarks and AccelWattch validation set benchmarks are also i
     
     To build the Accel-Sim simulator that uses the traces, do the following:
     ```bash
-    pip3 install -r requirements.txt
     source ./gpu-simulator/setup_environment.sh
     make -j -C ./gpu-simulator/
     ```
