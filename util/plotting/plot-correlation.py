@@ -548,7 +548,7 @@ def parse_hw_csv(csv_file, hw_data, appargs, kdata, logger):
                 continue
 
             # The frist line is a header line what indicates the place of each stat on the next line
-            if state == "header_proc":
+            if state == "header_proc" and len(row) > 0:
                 if "Event result" in row[0]:
                     continue
                 header = row
