@@ -1,6 +1,8 @@
 [submodule "gpu-app-collection"]
 	path = gpu-app-collection
-	url = git@github.com:accel-sim/gpu-app-collection.git
+	url = git@github.com:simonebortolin/gpu-app-collection.git
+	branch = release
 [submodule "gpu-simulator/gpgpu-sim"]
 	path = gpu-simulator/gpgpu-sim
 	url = git@github.com:simonebortolin/gpgpu-sim_distribution.git
+	branch = dev
