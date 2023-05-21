@@ -1,0 +1,158 @@
+- chart_name: L2 Read Hits
+  plotfile: l2-read-hits
+  hw_eval: np.average(hw[\"lts__t_sectors_srcunit_tex_op_read_lookup_hit.sum\"])
+  hw_error: None,
+  sim_eval: float(sim[\"\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[HIT\]\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: L2 Reads
+  plotfile: l2-read-transactions
+  hw_eval: np.average(hw[\"lts__t_sectors_srcunit_tex_op_read.sum\"])
+  hw_error: None,
+  sim_eval: float(sim[\"\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[TOTAL_ACCESS\]\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: L2 Writes
+  plotfile: l2-write-transactions
+  hw_eval: np.average(hw[\"lts__t_sectors_srcunit_tex_op_write.sum\"])
+  hw_error: None,
+  sim_eval: float(sim[\"\s+L2_cache_stats_breakdown\[GLOBAL_ACC_W\]\[TOTAL_ACCESS\]\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: L2 Write Hits
+  plotfile: l2-write-hits
+  hw_eval: np.average(hw[\"lts__t_sectors_srcunit_tex_op_write_lookup_hit.sum\"])
+  hw_error: None,
+  sim_eval: float(sim[\"\s+L2_cache_stats_breakdown\[GLOBAL_ACC_W\]\[HIT\]\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: L2 BW
+  plotfile: l2_bw
+  hw_eval: np.average(hw[\"lts__t_sectors_srcunit_tex_op_read.sum.per_second\"] * 32)
+  hw_error: None,
+  sim_eval: float(sim[\"L2_BW\s*=\s*(.*)GB\/Sec\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: linear
+  stattype: rate
+
+- chart_name: L2 Read Hit Rate
+  plotfile: l2-read-hitrate
+  hw_eval: np.average(hw[\"lts__t_sector_op_read_hit_rate.pct\"])
+  hw_error: None,
+  sim_eval: |
+    "100*float(sim[\"\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[HIT\]\s*=\s*(.*)\"])/ +"
+    "float(sim[\"\s+L2_cache_stats_breakdown\[GLOBAL_ACC_R\]\[TOTAL_ACCESS\]\s*=\s*(.*)\"])"
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: linear
+  stattype: rate
+
+- chart_name: L2 Write Hit Rate
+  plotfile: l2-write-hitrate
+  hw_eval: np.average(hw[\"lts__t_sector_op_write_hit_rate.pct\"])
+  hw_error: None,
+  sim_eval: |
+    "100*float(sim[\"\s+L2_cache_stats_breakdown\[GLOBAL_ACC_W\]\[HIT\]\s*=\s*(.*)\"])/ +"
+    "float(sim[\"\s+L2_cache_stats_breakdown\[GLOBAL_ACC_W\]\[TOTAL_ACCESS\]\s*=\s*(.*)\"])"
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: linear
+  stattype: rate
+
+- chart_name: Occupancy
+  plotfile: occupancy
+  hw_eval: np.average(hw[\"sm__warps_active.avg.pct_of_peak_sustained_active\"])
+  hw_error: None,
+  sim_eval: float(sim[\"gpu_occupancy\s*=\s**(.*)%\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: linear
+  stattype: rate
+
+- chart_name: L1D Read Hits
+  plotfile: l1hitreads
+  hw_eval: np.average(hw[\"l1tex__t_sectors_pipe_lsu_mem_global_op_ld_lookup_hit.sum\"])
+  hw_error: None,
+  sim_eval: |
+      "float(sim[\"\s+Total_core_cache_stats_breakdown\[GLOBAL_ACC_R\]\[HIT\]\s*=\s*(.*)\"]) +"
+      "float(sim[\"\s+Total_core_cache_stats_breakdown\[GLOBAL_ACC_R\]\[MSHR_HIT\]\s*=\s*(.*)\"])"
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: L1D Write Hits
+  plotfile: l1hitwrites
+  hw_eval: np.average(hw[\"l1tex__t_sectors_pipe_lsu_mem_global_op_st_lookup_hit.sum\"])
+  hw_error: None,
+  sim_eval: float(sim[\"\s+Total_core_cache_stats_breakdown\[GLOBAL_ACC_W\]\[HIT\]\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: L1D Read Access
+  plotfile: l1readaccess
+  hw_eval: np.average(hw[\"l1tex__t_sectors_pipe_lsu_mem_global_op_ld.sum\"])
+  hw_error: None,
+  sim_eval: float(sim[\"\s+Total_core_cache_stats_breakdown\[GLOBAL_ACC_R\]\[TOTAL_ACCESS\]\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: L1D Write Access
+  plotfile: l1writeaccess
+  hw_eval: np.average(hw[\"l1tex__t_sectors_pipe_lsu_mem_global_op_st.sum\"])
+  hw_error: None,
+  sim_eval: float(sim[\"\s+Total_core_cache_stats_breakdown\[GLOBAL_ACC_W\]\[TOTAL_ACCESS\]\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: DRAM Reads
+  plotfile: dram-read-transactions
+  hw_eval: np.average(hw[\"dram__sectors_read.sum\"])
+  hw_error: None,
+#    sim_eval: float(sim[\"Read\s*=\s**(.*)\"])+float(sim[\"L2_Alloc\s*=\s**(.*)\"])*24
+  sim_eval: float(sim[\"total dram reads\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: DRAM Writes
+  plotfile: dram-write-transactions
+  hw_eval: np.average(hw[\"dram__sectors_write.sum\"])
+  hw_error: None,
+  sim_eval: float(sim[\"total dram writes\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: log
+  stattype: counter
+
+- chart_name: IPC
+  plotfile: ipc
+  hw_eval: np.average(hw[\"inst_issued\"])/(np.average(hw[\"elapsed_cycles_sm\"])/80)
+  hw_error: |
+        "np.average(hw[\"inst_issued\"])/(np.max(hw[\"elapsed_cycles_sm\"])/80) - np.average(hw[\"inst_issued\"])/(np.average(hw[\"elapsed_cycles_sm\"])/80) +"
+        "np.average(hw[\"inst_issued\"])/(np.average(hw[\"elapsed_cycles_sm\"])/80) - np.average(hw[\"inst_issued\"])/(np.min(hw[\"elapsed_cycles_sm\"])/80)"
+  sim_eval: np.average(hw[\"inst_issued\"])/float(sim[\"gpu_tot_sim_cycle\s*=\s*(.*)\"])
+  hw_name: all
+  drophwnumbelow: 0,
+  plottype: linear
+  stattype: rate

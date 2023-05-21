@@ -1,5 +1,8 @@
 # Basefile Configs
 
+TITANRTX:
+    base_file: "$GPGPUSIM_ROOT/configs/tested-cfgs/SM75_NVIDIA_TITAN_RTX/gpgpusim.config"
+
 # Pascal
 TITANX:
     base_file: "$GPGPUSIM_ROOT/configs/tested-cfgs/SM6_TITANX/gpgpusim.config"

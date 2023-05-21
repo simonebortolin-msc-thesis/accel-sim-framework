@@ -197,4 +197,4 @@ with open(options.run_time, 'a', newline='') as file:
                 os.chdir(saved_dir)
 
                 inner_delta = datetime.datetime.now() - inner_now_time 
-                writer.writerow([exe, args, inner_delta])
+                writer.writerow([exe, args or "NO_ARGS", inner_delta])

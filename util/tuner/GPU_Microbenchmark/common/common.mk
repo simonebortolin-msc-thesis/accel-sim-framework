@@ -11,7 +11,7 @@ CUOPTS =  $(GENCODE_ARCH) $(GENCODE_SM75) $(GENCODE_SM80)
 CC := nvcc
 
 CUDA_PATH ?= /use/local/cuda-10.1/
-INCLUDE := $(CUDA_PATH)/samples/common/inc/
+INCLUDE := /home/bortolinsi/source/repos/cuda-samples/Common
 LIB := 
 
 release:

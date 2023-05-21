@@ -176,7 +176,7 @@ def make_submission_quality_image(image_type, traces, hw_cfg):
         trace.error_x.color =  re.sub(r"(,.*,.*),.*\)",r"\1,0.3)", trace.error_x.color)
         kernel_annotations.append(make_anno1(anno,22,0,1.115 - count * 0.05))
         print_anno += anno + " :: {0} high error points dropped from Err calc. {1} dropped for HW too low (>{2})\n".format(
-            err_dropped, hw_low_drop, correlmap.drophwnumbelow)
+            err_dropped, hw_low_drop, correlmap["drophwnumbelow"])
         agg_cfg += "." + cfg
         app_str, kernel_str = make_pretty_app_list(apps_included)
         kernellist_file_contents += "{0}\n{1}\n\n".format(anno, kernel_str)
@@ -515,7 +515,7 @@ def parse_hw_csv_2(csv_file, hw_data, appargs, kdata, logger):
                     logger.log("Bad line - possibly the app failed -- {0}".format(row))
                     continue
 
-                if len(kdata) <= kcount:
+                while len(kdata) <= kcount:
                     kdata.append({})
                 if metric not in kdata[kcount]:
                     kdata[kcount][metric] = []
@@ -786,7 +786,7 @@ for cfg,sim_for_cfg in sim_data.items():
         continue
 
     for correl in correl_list:
-        if correl.hw_name != "all" and correl.hw_name not in hw_cfg:
+        if correl["hw_name"] != "all" and correl["hw_name"] not in hw_cfg:
             logger.log("for cfg:{0}, hw_cfg:{1} - Skipping plot:\n{2}".format(cfg, hw_cfg, correl))
             continue
 
@@ -827,37 +827,37 @@ for cfg,sim_for_cfg in sim_data.items():
                     for sim in sim_klist:
                         hw = hw_klist[count]
                         try:
-                            logger.log("Evaluating HW: {0}".format(correl.hw_eval))
-                            hw_array.append(eval(correl.hw_eval))
+                            logger.log("Evaluating HW: {0}".format(correl["hw_eval"]))
+                            hw_array.append(eval(correl["hw_eval"]))
                         except:
                             e = sys.exc_info()[0]
-                            logger.log("Potentially uncollected stat in {0}.Error: {1}".format(correl.hw_eval, e))
+                            logger.log("Potentially uncollected stat in {0}.Error: {1}".format(correl["hw_eval"], e))
 #                            print hw
 #                            exit(1)
                             count += 1
                             continue
 
-                        if hw_array[-1] < correl.drophwnumbelow:
+                        if hw_array[-1] < correl["drophwnumbelow"]:
                             hw_low_drop_stats += 1
                             hw_array = hw_array[:-1]
                             count += 1
                             continue
 
                         try:
-                            sim_array.append(eval(correl.sim_eval))
+                            sim_array.append(eval(correl["sim_eval"]))
                         except KeyError as e:
-                            logger.log("Potentially uncollected stat in {0}.Error: {1}".format(correl.sim_eval, e))
+                            logger.log("Potentially uncollected stat in {0}.Error: {1}".format(correl["sim_eval"], e))
                             hw_array = hw_array[:-1]
                             count += 1
                             continue
                         except ZeroDivisionError as e:
-                           logger.log("Division by zerofor  stat in {0}.Error: {1}".format(correl.sim_eval, e))
+                           logger.log("Division by zerofor  stat in {0}.Error: {1}".format(correl["sim_eval"], e))
                            count += 1
                            hw_array = hw_array[:-1]
                            continue
  
-                        if correl.hw_error != None:
-                            maxe,mine = eval(correl.hw_error)
+                        if correl["hw_error"] != None:
+                            maxe,mine = eval(correl["hw_error"])
                             hw_error.append(maxe)
                             hw_error_min.append(mine)
                         else:
@@ -960,22 +960,22 @@ for cfg,sim_for_cfg in sim_data.items():
                 .format(appcount, kernelcount,correl_co, avg_err,num_under,num_over,num_less_than_one_percent, num_less_than_ten_percent)
 
         layout = Layout(
-            title=correl.chart_name,
+            title=correl["chart_name"],
              xaxis=dict(
-                title='Hardware {1}'.format(hw_cfg, correl.chart_name),
+                title='Hardware {1}'.format(hw_cfg, correl["chart_name"]),
                 range=[min_axis_val * 0.9 ,max_axis_val*1.1]
             ),
             yaxis=dict(
-                title='Simulation {0}'.format(correl.chart_name),
+                title='Simulation {0}'.format(correl["chart_name"]),
                 range=[min_axis_val * 0.9 ,max_axis_val*1.1]
             ),
         )
 
         data = [trace]
 
-        if (correl.plotfile, hw_cfg) not in fig_data:
-            fig_data[ (correl.plotfile, hw_cfg) ] = []
-        fig_data[ (correl.plotfile, hw_cfg) ].append((trace, layout, cfg, anno, correl.plotfile, err_dropped_stats, apps_included, correl, hw_low_drop_stats))
+        if (correl["plotfile"], hw_cfg) not in fig_data:
+            fig_data[ (correl["plotfile"], hw_cfg) ] = []
+        fig_data[ (correl["plotfile"], hw_cfg) ].append((trace, layout, cfg, anno, correl["plotfile"], err_dropped_stats, apps_included, correl, hw_low_drop_stats))
 
 
 correl_outdir = os.path.join(this_directory, "correl-html")
